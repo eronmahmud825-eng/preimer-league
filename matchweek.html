@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Match Week</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">Match Week — Add Result</h1>
+
+        <div class="card form-card">
+            <div class="form-container">
+                <label>Admin Password:
+          <input id="adminPass" type="password" inputmode="text" autocomplete="off" placeholder="Enter admin password"/>
+        </label>
+
+                <label>Player 1:
+          <select id="player1">
+            <option value="">Select</option>
+            <option>ERON</option>
+            <option>ARIN</option>
+            <option>LAWIN</option>
+          </select>
+        </label>
+
+                <label>Score 1:
+          <input id="score1" type="number" min="0" placeholder="0" />
+        </label>
+
+                <label>Player 2:
+          <select id="player2">
+            <option value="">Select</option>
+            <option>ERON</option>
+            <option>ARIN</option>
+            <option>LAWIN</option>
+          </select>
+        </label>
+
+                <label>Score 2:
+          <input id="score2" type="number" min="0" placeholder="0" />
+        </label>
+
+                <label>Date:
+          <input id="matchDate" type="date"/>
+        </label>
+
+                <div class="form-actions">
+                    <button id="saveMatchBtn">💾 Save Match</button>
+                    <button class="back-btn" onclick="location.href='index.html'">⬅ Back</button>
+                </div>
+            </div>
+        </div>
+
+        <p class="muted">Only admin can save matches.</p>
+    </div>
+
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+/* style.css - mobile-first dark theme with stacked cards for tables */
+
+
+/* Base */
+
+:root {
+    --bg1: #141427;
+    --bg2: #1e1e2f;
+    --card: #151524;
+    --accent: #00e6ac;
+    --muted: rgba(255, 255, 255, 0.6);
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2));
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Container */
+
+.container {
+    width: 94%;
+    max-width: 820px;
+    margin: 18px auto;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+/* Title */
+
+.title {
+    text-align: center;
+    color: var(--accent);
+    font-size: 1.6rem;
+    margin: 6px 0 12px 0;
+    letter-spacing: 0.4px;
+}
+
+
+/* Cards & panels */
+
+.card {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+
+/* Buttons */
+
+.btn-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+button {
+    background: var(--accent);
+    color: #0f1720;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    transition: transform .12s ease, background .12s;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    background: #00c996;
+}
+
+
+/* Back/secondary button */
+
+.back-btn {
+    background: #2d2e3d;
+    color: #fff;
+    max-width: 220px;
+}
+
+
+/* Table container (keeps layout neat) */
+
+.table-card {
+    padding: 10px;
+}
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Table default style (desktop/tablet) */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 600px;
+    /* ensures wide layout for desktop but we stack on mobile */
+}
+
+th,
+td {
+    padding: 10px 12px;
+    text-align: center;
+}
+
+th {
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--accent);
+    position: sticky;
+    top: 0;
+}
+
+
+/* Row backgrounds */
+
+tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+
+/* Form */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+input,
+select {
+    width: 90%;
+    max-width: 320px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--white);
+}
+
+
+/* Delete button style */
+
+.delete-btn {
+    background: #ff5a5a;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #e04545;
+}
+
+
+/* muted text */
+
+.muted {
+    color: var(--muted);
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+
+/* Button row */
+
+.btn-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+
+/* STACKED CARD MODE FOR MOBILE */
+
+@media (max-width:640px) {
+    .container {
+        margin: 10px auto;
+        padding: 14px;
+    }
+    .title {
+        font-size: 1.3rem;
+    }
+    /* Convert table into stacked cards */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+        width: 100%;
+    }
+    thead {
+        display: none;
+    }
+    /* hide header */
+    tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        padding: 10px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    }
+    td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 10px;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+        font-size: 14px;
+    }
+    td:last-child {
+        border-bottom: 0;
+    }
+    /* data label on left */
+    td::before {
+        content: attr(data-label);
+        color: var(--accent);
+        font-weight: 700;
+        margin-right: 8px;
+        display: inline-block;
+        width: 40%;
+        text-align: left;
+    }
+    td span.value {
+        width: 56%;
+        text-align: right;
+        display: inline-block;
+    }
+    .delete-btn {
+        width: 100%;
+        display: block;
+        margin-top: 8px;
+    }
+    table {
+        min-width: 0;
+    }
+}

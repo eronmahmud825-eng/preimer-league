@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football League</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">🏆 Football League Manager</h1>
+
+        <div class="card">
+            <div class="btn-stack">
+                <button onclick="location.href='table.html'">🏁 TABLE RACE</button>
+                <button onclick="location.href='matchweek.html'">📅 MATCH WEEK</button>
+                <button onclick="location.href='history.html'">📜 HISTORY GAME</button>
+            </div>
+
+            <!-- firebase init -->
+            <script src="firebase.js"></script>
+            <script src="script.js"></script>
+</body>
+
+</html>
