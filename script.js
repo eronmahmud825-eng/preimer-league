@@ -215,4 +215,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Start realtime only once (safe to call on all pages)
     startRealtimeListeners();
+    // ==========================
+    // Load Encounters (Head-to-Head)
+    // ==========================
+    function loadEncounters() {
+        const tbody = document.querySelector("#encountersTable tbody");
+        if (!tbody) return;
+        tbody.innerHTML = "";
+
+        db.collection("matches").get().then(snapshot => {
+            const results = {};
+
+            snapshot.forEach(doc => {
+                const m = doc.data();
+                const p1 = m.p1,
+                    p2 = m.p2,
+                    s1 = Number(m.s1),
+                    s2 = Number(m.s2);
+
+                if (!results[p1]) results[p1] = {};
+                if (!results[p2]) results[p2] = {};
+                if (!results[p1][p2]) results[p1][p2] = { wins: 0, losses: 0 };
+                if (!results[p2][p1]) results[p2][p1] = { wins: 0, losses: 0 };
+
+                if (s1 > s2) {
+                    results[p1][p2].wins++;
+                    results[p2][p1].losses++;
+                } else if (s2 > s1) {
+                    results[p2][p1].wins++;
+                    results[p1][p2].losses++;
+                }
+            });
+
+            Object.keys(results).forEach(coach => {
+                Object.keys(results[coach]).forEach(opp => {
+                    const { wins, losses } = results[coach][opp];
+                    if (wins > 0 || losses > 0) {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+            <td data-label="Coach">${coach}</td>
+            <td data-label="Opponent">${opp}</td>
+            <td data-label="Wins">${wins}</td>
+            <td data-label="Losses">${losses}</td>
+          `;
+                        tbody.appendChild(tr);
+                    }
+                });
+            });
+        });
+    }
+
+    window.addEventListener("load", loadEncounters);
+
 });
